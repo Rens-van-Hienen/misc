@@ -48,8 +48,8 @@ void qsort(int *arr, int size){
 		i++;
 	}
 	size = size - pivot;
-	if(pivot > 1) quickSort(arr, pivot);
-	if(size  > 1) quickSort((arr + pivot), size);
+	if(pivot > 1) qsort(arr, pivot);
+	if(size  > 1) qsort((arr + pivot), size);
 	return;
 }
 */
