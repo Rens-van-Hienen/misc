@@ -2,12 +2,12 @@
  * This is my own implementation of the quicksort algorithm.
  */
 
-void qsort(void* base, size_t num, size_t size, 
-		int (*compar)(const void*,const void*)){
+void qsort(void *base, size_t num, size_t size, 
+		int (*compare)(const void*,const void*)){
 	size_t pivot = num - 1;
 	size_t i = 0;
 	while(i < pivot){
-		if(compar(base + i * size, base + pivot * size) > 0){
+		if(compare((char *)base + i * size, (char *)base + pivot * size) > 0){
 			size_t j = size;
 			char tmp;
 			char *a = (char *)base + i * size;
@@ -25,7 +25,7 @@ void qsort(void* base, size_t num, size_t size,
 	}
 	num = num - pivot;
 	if(pivot > 1) qsort(base, pivot, size, compar);
-	if(num   > 1) qsort((base + pivot * size), num, size, compar);
+	if(num   > 1) qsort(((char *)base + pivot * size), num, size, compare);
 	return;
 }
 
