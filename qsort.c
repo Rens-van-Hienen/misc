@@ -4,15 +4,16 @@
 
 void qsort(void *base, size_t num, size_t size, 
 		int (*compare)(const void*,const void*)){
+	char *bptr = (char *)base;
 	size_t pivot = num - 1;
 	size_t i = 0;
 	while(i < pivot){
-		if(compare((char *)base + i * size, (char *)base + pivot * size) > 0){
+		if(compare(bptr + i * size, bptr + pivot * size) > 0){
 			size_t j = size;
 			char tmp;
-			char *a = (char *)base + i * size;
-			char *b = (char *)base + pivot * size;
-			char *c = (char *)base + (--pivot) * size;
+			char *a = bptr + i * size;
+			char *b = bptr + pivot * size;
+			char *c = bptr + (--pivot) * size;
 			while(j--){
 				tmp = *a;
 				*a++ = *c;
@@ -24,8 +25,8 @@ void qsort(void *base, size_t num, size_t size,
 		i++;
 	}
 	num = num - pivot;
-	if(pivot > 1) qsort(base, pivot, size, compar);
-	if(num   > 1) qsort(((char *)base + pivot * size), num, size, compare);
+	if(pivot > 1) qsort(bptr, pivot, size, compar);
+	if(num   > 1) qsort((bptr + pivot * size), num, size, compare);
 	return;
 }
 
